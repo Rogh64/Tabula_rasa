@@ -19,6 +19,11 @@
 #define PICTOCONDITIONMULTIPLE_HPP
 
 #include "pictogramme.hpp"
+
+#define TailleMaxCondM 250
+#define hauteurMaxCondM 80
+
+
 class AlgorithmeScene;
 
 class PictoConditionMultiple : public Pictogramme {

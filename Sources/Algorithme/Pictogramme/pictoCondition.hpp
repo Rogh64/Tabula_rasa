@@ -20,6 +20,9 @@
 
 #include "pictogramme.hpp"
 
+#define TailleMaxCond 250
+#define hauteurMaxCond 80
+
 class AlgorithmeScene;
 
 class PictoCondition : public Pictogramme {

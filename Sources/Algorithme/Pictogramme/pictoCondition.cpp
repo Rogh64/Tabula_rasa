@@ -40,10 +40,10 @@ PictoCondition::PictoCondition() :
 PictoCondition::PictoCondition(const QString& label) :
      Pictogramme(), isForeverAlone_( false )
 {/*{{{*/
-     labels_ << new LabelItem( label, 150, 25, 50, this );
+     labels_ << new LabelItem( label, TailleMaxCond , 25, hauteurMaxCond - 10, this );
      labels_.at( 0 )->setAnchorType( AncreItem::Down );
 
-     labels_ << new LabelItem( "Sinon", 150, 25, 50, this );
+     labels_ << new LabelItem( "Sinon", 150, 25, hauteurMaxCond - 10 , this );
      labels_.at( 1 )->setAnchorType( AncreItem::Down );
 
      setAnchorType( AncreItem::Up );
@@ -82,14 +82,14 @@ void PictoCondition::paint( QPainter* painter,
      Q_UNUSED( option );
      Q_UNUSED( widget );
      int pos = 0;
-     painter->drawLine( pos, 25, 20, 0 );
-     painter->drawLine( pos, 25, 20, 50 );
+     painter->drawLine( pos, (hauteurMaxCond - 10) / 2, 20, 0 );
+     painter->drawLine( pos, (hauteurMaxCond - 10) / 2, 20, (hauteurMaxCond - 10) );
      pos += labels_.at( 0 )->width() + 35;
 
      if( !isForeverAlone_ ) {
 
              for( int i = 1; i< labels_.size(); i++ ) {
-                 painter->drawLine( pos, 0, pos, 50 );
+                 painter->drawLine( pos, 0, pos, (hauteurMaxCond - 10) );
                  pos += labels_.at( i )->width() + 15;
                  labels_[i]->setEnabled( true );
                  labels_[i]->setVisible( true );
@@ -105,16 +105,16 @@ void PictoCondition::paint( QPainter* painter,
      }
 
      painter->drawLine( 20, 0, pos, 0 );
-     painter->drawLine( 20, 50, pos, 50 );
-     painter->drawLine( pos, 0, pos + 20, 25 );
-     painter->drawLine( pos, 50, pos + 20, 25 );
+     painter->drawLine( 20, (hauteurMaxCond - 10), pos, (hauteurMaxCond - 10) );
+     painter->drawLine( pos, 0, pos + 20, (hauteurMaxCond - 10) / 2 );
+     painter->drawLine( pos, (hauteurMaxCond - 10), pos + 20, (hauteurMaxCond - 10) / 2 );
      pos += 20;
      Pictogramme::paint( painter, option, widget );
 }/*}}}*/
 
 QRectF PictoCondition::boundingRect() const
 {/*{{{*/
-     return QRectF( 0, 0, pos_, 50 );
+     return QRectF( 0, 0, pos_, (hauteurMaxCond - 10) );
 }/*}}}*/
 
 void PictoCondition::updateDimension()
@@ -222,7 +222,7 @@ void PictoCondition::processAction( QAction* action, QGraphicsSceneContextMenuEv
           updateDimension();
 
      }else if( getContextMenuAction("AjouterA") == action ) {
-               LabelItem* item = new LabelItem( "", 150, 25, 50, this );
+               LabelItem* item = new LabelItem( "", TailleMaxCond , 25, (hauteurMaxCond - 10), this );
                item->setAnchorType( AncreItem::Down );
 
                labels_.insert( labels_.size() - 1, item );
