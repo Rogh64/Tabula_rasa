@@ -23,8 +23,6 @@ Tabula rasa est un editeur d'algorithme conçu pour répondre aux spécification
 
 # Installation pour Windows
 
-* Se rendre sur https://github.com/erebe/Tabula_rasa
-* Cliquer sur le bouton "Download" en haut à droite
 * Télécharger la package "Tabula_Rasa-VX.X.zip"
 * Extraire tous les fichiers et lancer l'executable
 
