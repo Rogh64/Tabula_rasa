@@ -20,9 +20,7 @@
 
 #include "pictogramme.hpp"
 
-#define TailleMaxCondM 250
-#define hauteurMaxCondM 80
-
+#define TailleMaxCondM 650
 
 class AlgorithmeScene;
 

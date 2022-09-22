@@ -24,6 +24,8 @@
 #include "ancreItem.hpp"
 #include "labelItem.hpp"
 
+#define hauteurMax 100
+
 class QGraphicsItem;
 
 class Pictogramme : public QObject, public AncreItem {

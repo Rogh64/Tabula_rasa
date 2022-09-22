@@ -21,6 +21,9 @@
 
 class AlgorithmeScene;
 
+#define TailleMaxProc 400
+#define TailleMaxLabelProc 250
+
 class PictoProcedure : public Pictogramme {
 
      public:

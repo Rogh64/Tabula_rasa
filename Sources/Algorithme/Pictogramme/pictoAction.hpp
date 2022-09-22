@@ -24,7 +24,7 @@ class LabelItem;
 class AlgorithmeScene;
 
 #define TailleMaxAction 400
-#define hauteurMaxAction 80
+#define TailleMaxLabelAction 250
 
 class PictoAction: public Pictogramme {
 

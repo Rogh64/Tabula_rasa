@@ -20,13 +20,13 @@ PictoConditionMultiple::PictoConditionMultiple() {
 PictoConditionMultiple::PictoConditionMultiple(const QString& label) :
      Pictogramme()
 {/*{{{*/
-     labels_ << new LabelItem( label, TailleMaxCondM * 2, 25, hauteurMaxCondM / 2, this );
+     labels_ << new LabelItem( label, TailleMaxCondM * 2, 25, hauteurMax / 2, this );
      labels_.last()->setAnchorType( AncreItem::Down );
 
-     labels_ << new LabelItem( label, TailleMaxCondM, 25, hauteurMaxCondM / 2, this );
+     labels_ << new LabelItem( label, TailleMaxCondM, 25, hauteurMax / 2, this );
      labels_.last()->setAnchorType( AncreItem::Down );
 
-     labels_ << new LabelItem( "Sinon", TailleMaxCondM , 25, hauteurMaxCondM / 2, this );
+     labels_ << new LabelItem( "Sinon", TailleMaxCondM , 25, hauteurMax / 2, this );
      labels_.last()->setAnchorType( AncreItem::Down );
 
      setAnchorType( AncreItem::Up );
@@ -54,8 +54,8 @@ void PictoConditionMultiple::paint( QPainter* painter, const QStyleOptionGraphic
      Q_UNUSED( option );
      Q_UNUSED( widget );
      unsigned int pos = 0;
-     painter->drawLine( pos, (hauteurMaxCondM - 10) / 2, 20, 0 );
-     painter->drawLine( pos, (hauteurMaxCondM - 10) / 2, 20, (hauteurMaxCondM - 10) );
+     painter->drawLine( pos, (hauteurMax - 10) / 2, 20, 0 );
+     painter->drawLine( pos, (hauteurMax - 10) / 2, 20, (hauteurMax - 10) );
      pos += 20;
 
      if( labels_.size() > 1 ) {
@@ -63,7 +63,7 @@ void PictoConditionMultiple::paint( QPainter* painter, const QStyleOptionGraphic
 
           for( i = 1; i < labels_.size() - 1; i++ ) {
                pos += labels_[i]->width() + 10;
-               painter->drawLine( pos, (hauteurMaxCondM - 10) / 2, pos, (hauteurMaxCondM - 10) );
+               painter->drawLine( pos, (hauteurMax - 10) / 2, pos, (hauteurMax - 10) );
           }
 
           pos += labels_[i]->width() + 10;
@@ -73,18 +73,18 @@ void PictoConditionMultiple::paint( QPainter* painter, const QStyleOptionGraphic
           pos = labels_.at( 0 )->width() + 40;
      }
 
-     painter->drawLine( pos, 0, pos + 20, (hauteurMaxCondM - 10) / 2 );
-     painter->drawLine( pos, (hauteurMaxCondM - 10) , pos + 20, (hauteurMaxCondM - 10) / 2 );
+     painter->drawLine( pos, 0, pos + 20, (hauteurMax - 10) / 2 );
+     painter->drawLine( pos, (hauteurMax - 10) , pos + 20, (hauteurMax - 10) / 2 );
      painter->drawLine( 20, 0, pos, 0 );
-     painter->drawLine( 20, (hauteurMaxCondM - 10), pos , (hauteurMaxCondM - 10) );
+     painter->drawLine( 20, (hauteurMax - 10), pos , (hauteurMax - 10) );
      pos += 20;
-     painter->drawLine( 0, (hauteurMaxCondM - 10) / 2, pos, (hauteurMaxCondM - 10) / 2);
+     painter->drawLine( 0, (hauteurMax - 10) / 2, pos, (hauteurMax - 10) / 2);
      Pictogramme::paint( painter, option, widget );
 }/*}}}*/
 
 QRectF PictoConditionMultiple::boundingRect() const
 {/*{{{*/
-     return QRectF( 0, 0, pos_, (hauteurMaxCondM - 10) );
+     return QRectF( 0, 0, pos_, (hauteurMax - 10) );
 }/*}}}*/
 
 void PictoConditionMultiple::updateDimension()
@@ -94,7 +94,7 @@ void PictoConditionMultiple::updateDimension()
 
      for( int  i = 1; i < labels_.size(); i++ ) {
           pos_ += 5;
-          labels_[i]->setPos( pos_, (hauteurMaxCondM - 10) / 2 );
+          labels_[i]->setPos( pos_, (hauteurMax - 10) / 2 );
           pos_ += labels_[i]->width() + 5;
      }
 
@@ -173,7 +173,7 @@ QVariant PictoConditionMultiple::itemChange( GraphicsItemChange change, const QV
 void PictoConditionMultiple::processAction( QAction* action, QGraphicsSceneContextMenuEvent* event )
 {/*{{{*/
      if( getContextMenuAction("AjouterA") == action ) {
-          LabelItem* item = new LabelItem( "", TailleMaxCondM, 25, (hauteurMaxCondM - 10) / 2, this );
+          LabelItem* item = new LabelItem( "", TailleMaxCondM, 25, (hauteurMax - 10) / 2, this );
           item->setAnchorType( AncreItem::Down );
 
           labels_.insert( labels_.size() - 1, item );

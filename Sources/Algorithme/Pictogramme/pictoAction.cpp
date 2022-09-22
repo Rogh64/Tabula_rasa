@@ -30,12 +30,12 @@ PictoAction::PictoAction( QString titre,
                           QGraphicsItem* parent ) :
      Pictogramme( parent ), detail_( true ), emptyDetail_( true )
 {/*{{{*/
-     labels_ << new LabelItem( preCondition, 150, 15, hauteurMaxAction - 10, this );
-     labels_ << new LabelItem( titre, TailleMaxAction, 50, hauteurMaxAction - 10, this );
-     labels_ << new LabelItem( postCondition, 150, 15, hauteurMaxAction - 10 , this );
+     labels_ << new LabelItem( preCondition, TailleMaxLabelAction, 15, hauteurMax - 10, this );
+     labels_ << new LabelItem( titre, TailleMaxAction, 50, hauteurMax - 10, this );
+     labels_ << new LabelItem( postCondition, TailleMaxLabelAction, 15, hauteurMax - 10 , this );
 
      setAnchorType( AncreItem::Both );
-     posBottomAnchor_.setY( hauteurMaxAction - 5 );
+     posBottomAnchor_.setY( hauteurMax - 5 );
      posUpAnchor_.setY( 5 );
 
      updateDimension();
@@ -69,7 +69,7 @@ void PictoAction::paint( QPainter* painter, const QStyleOptionGraphicsItem* opti
      int pos = drawDetails( painter, labels_.at( 0 ), 5 );
      pos += 10;
      painter->drawRect( pos, 5,
-                        labels_.at( 1 )->width(), hauteurMaxAction - 10);
+                        labels_.at( 1 )->width(), hauteurMax - 10);
      labels_.at( 1 )->setPos( pos, 5 );
      pos += labels_.at( 1 )->width() + 15;
      pos = drawDetails( painter, labels_.at( 2 ), pos );
@@ -78,7 +78,7 @@ void PictoAction::paint( QPainter* painter, const QStyleOptionGraphicsItem* opti
 
 QRectF PictoAction::boundingRect() const
 {/*{{{*/
-     return QRectF( 0, 0, pos_, hauteurMaxAction );
+     return QRectF( 0, 0, pos_, hauteurMax );
 }/*}}}*/
 
 void PictoAction::updateDimension()
@@ -163,17 +163,17 @@ int PictoAction::drawDetails( QPainter* painter, LabelItem* texte, int pos ) con
 {/*{{{*/
      if( detail() &&
          ( emptyDetail_ || ( !emptyDetail_ && !texte->isEmpty() ) ) ) {
-          painter->drawArc( pos, 5, 10, (hauteurMaxAction / 2 ) - 5, 90 * 16, 179 * 16 );
-          painter->drawArc( pos - 6, (hauteurMaxAction / 2), 15, 2, 90 * 16, 180 * 16 );
-          painter->drawArc( pos, (hauteurMaxAction / 2) + 2, 10, (hauteurMaxAction / 2) - 5, 90 * 16, 179 * 16 );
+          painter->drawArc( pos, 5, 10, (hauteurMax / 2 ) - 5, 90 * 16, 179 * 16 );
+          painter->drawArc( pos - 6, (hauteurMax / 2), 15, 2, 90 * 16, 180 * 16 );
+          painter->drawArc( pos, (hauteurMax / 2) + 2, 10, (hauteurMax / 2) - 5, 90 * 16, 179 * 16 );
           pos += 15;
           texte->setPos( pos, 4 );
           texte->setEnabled( true );
           texte->setVisible( true );
           pos += texte->width() + 5;
-          painter->drawArc( pos, 5, 10, (hauteurMaxAction / 2 ) - 5, 90 * 16, -179 * 16 );
-          painter->drawArc( pos + 1, (hauteurMaxAction / 2 ), 15, 2, 90 * 16, -180 * 16 );
-          painter->drawArc( pos, (hauteurMaxAction / 2 ) + 2, 10, (hauteurMaxAction / 2 ) - 5, 90 * 16, -179 * 16 );
+          painter->drawArc( pos, 5, 10, (hauteurMax / 2 ) - 5, 90 * 16, -179 * 16 );
+          painter->drawArc( pos + 1, (hauteurMax / 2 ), 15, 2, 90 * 16, -180 * 16 );
+          painter->drawArc( pos, (hauteurMax / 2 ) + 2, 10, (hauteurMax / 2 ) - 5, 90 * 16, -179 * 16 );
           pos += 15;
 
      } else {

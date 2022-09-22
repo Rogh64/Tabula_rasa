@@ -30,12 +30,12 @@ PictoProcedure::PictoProcedure( QString titre,
                                 QGraphicsItem* parent ) :
      Pictogramme( parent ), detail_( true ), emptyDetail_( true )
 {/*{{{*/
-     labels_ << new LabelItem( preCondition, 150, 15, 50, this );
-     labels_ << new LabelItem( titre, 200, 50, 50, this );
-     labels_ << new LabelItem( postCondition, 150, 15, 50, this );
+     labels_ << new LabelItem( preCondition, TailleMaxLabelProc, 15, hauteurMax - 10, this );
+     labels_ << new LabelItem( titre, TailleMaxProc, 50, hauteurMax - 10, this );
+     labels_ << new LabelItem( postCondition, TailleMaxLabelProc, 15, hauteurMax - 10, this );
 
      setAnchorType( AncreItem::Up );
-     posBottomAnchor_.setY( 55 );
+     posBottomAnchor_.setY( hauteurMax - 5 );
      posUpAnchor_.setY( 5 );
      updateDimension();
 
@@ -66,12 +66,12 @@ void PictoProcedure::paint( QPainter* painter, const QStyleOptionGraphicsItem* o
      Q_UNUSED( widget );
      int pos = drawDetails( painter, labels_.at( 0 ), 5 );
      painter->drawRect( pos, 5,
-                        labels_.at( 1 )->width() + 20, 50 );
+                        labels_.at( 1 )->width() + 20, hauteurMax - 10 );
      pos += 10;
      painter->drawLine( pos, 5,
-                        pos, 55 );
+                        pos, hauteurMax - 5 );
      painter->drawLine( pos + labels_.at( 1 )->width(), 5,
-                        pos + labels_.at( 1 )->width(), 55 );
+                        pos + labels_.at( 1 )->width(), hauteurMax - 5 );
      labels_.at( 1 )->setPos( pos, 5 );
      pos += labels_.at( 1 )->width() + 25;
      pos = drawDetails( painter, labels_.at( 2 ), pos );
@@ -80,7 +80,7 @@ void PictoProcedure::paint( QPainter* painter, const QStyleOptionGraphicsItem* o
 
 QRectF PictoProcedure::boundingRect() const
 {/*{{{*/
-     return QRectF( 0, 0, pos_, 60 );
+     return QRectF( 0, 0, pos_, hauteurMax );
 }/*}}}*/
 
 void PictoProcedure::updateDimension()
@@ -157,7 +157,7 @@ int PictoProcedure::drawDetails( QPainter* painter, LabelItem* texte, int pos ) 
 {/*{{{*/
      if( detail() &&
          ( emptyDetail_ || ( !emptyDetail_ && !texte->isEmpty() ) ) ) {
-          painter->drawArc( pos, 5, 10, 25, 90 * 16, 179 * 16 );
+          /*painter->drawArc( pos, 5, 10, 25, 90 * 16, 179 * 16 );
           painter->drawArc( pos - 6, 30, 15, 2, 90 * 16, 180 * 16 );
           painter->drawArc( pos, 32, 10, 25, 90 * 16, 179 * 16 );
           pos += 15;
@@ -168,7 +168,19 @@ int PictoProcedure::drawDetails( QPainter* painter, LabelItem* texte, int pos ) 
           painter->drawArc( pos, 5, 10, 25, 90 * 16, -179 * 16 );
           painter->drawArc( pos + 1, 30, 15, 2, 90 * 16, -180 * 16 );
           painter->drawArc( pos, 32, 10, 25, 90 * 16, -179 * 16 );
-          pos += 25;
+          pos += 25;*/
+         painter->drawArc( pos, 5, 10, (hauteurMax / 2 ) - 5, 90 * 16, 179 * 16 );
+         painter->drawArc( pos - 6, (hauteurMax / 2), 15, 2, 90 * 16, 180 * 16 );
+         painter->drawArc( pos, (hauteurMax / 2) + 2, 10, (hauteurMax / 2) - 5, 90 * 16, 179 * 16 );
+         pos += 15;
+         texte->setPos( pos, 4 );
+         texte->setEnabled( true );
+         texte->setVisible( true );
+         pos += texte->width() + 5;
+         painter->drawArc( pos, 5, 10, (hauteurMax / 2 ) - 5, 90 * 16, -179 * 16 );
+         painter->drawArc( pos + 1, (hauteurMax / 2 ), 15, 2, 90 * 16, -180 * 16 );
+         painter->drawArc( pos, (hauteurMax / 2 ) + 2, 10, (hauteurMax / 2 ) - 5, 90 * 16, -179 * 16 );
+         pos += 25;
 
      } else {
           texte->setEnabled( false );
