@@ -402,6 +402,13 @@ void MainWindow::on_actionOuvrir_triggered()
      TabWidget* tab = createNewTab(parser.parse(doc.documentElement()));
      tab->setTbrPath( fichier );
      file.close();
+
+     //reattache les events de double click pour la modif d'un algo rechargé
+     foreach(Pictogramme* item,tab->scene()->algorithm()->allPictograms())
+     {
+         connect( item, SIGNAL( doubleClick( LabelItem* ) ),
+                  this, SLOT( changeLabel( LabelItem* ) ) );
+     }
      setMode( AlgorithmeScene::MoveItem );
      setDisabled( false );
 }/*}}}*/

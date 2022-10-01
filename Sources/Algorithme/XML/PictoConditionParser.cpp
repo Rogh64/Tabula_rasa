@@ -21,7 +21,7 @@ Pictogramme* PictoConditionParser::parse(const QDomElement & element, Algorithm*
     for( int i = 0; i < nodes.count(); i++ ) {
         QDomNode currentNode = nodes.at(i);
          if( currentNode.isElement() ) {
-              LabelItem *labelItem = new LabelItem(readText(currentNode, "Titre"), 150, 25, 50, picto );
+              LabelItem *labelItem = new LabelItem(readText(currentNode, "Titre"), TailleMaxCond, 25, hauteurMax - 10, picto );
               labelItem->setAnchorType( AncreItem::Down );
 
               const QDomNodeList enfants = currentNode.firstChildElement( "Enfants" ).childNodes();

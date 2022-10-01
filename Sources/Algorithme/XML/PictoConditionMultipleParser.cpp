@@ -13,7 +13,7 @@ Pictogramme* PictoConditionMultipleParser::parse(const QDomElement & element, Al
     QStringList position = readText(element, "Position").split( QRegExp( ";" ) );
     picto->setPos( position.at( 0 ).toDouble(), position.at( 1 ).toDouble() );
 
-    picto->addLabel(new LabelItem(readText(element, "Titre"), 150, 25, 25, picto));
+    picto->addLabel(new LabelItem(readText(element, "Titre"), TailleMaxCondM, 25, hauteurMax / 2, picto));
 
     const QDomNodeList nodes = element.firstChildElement( "operationsLogiques" ).childNodes();
     Pictogramme* childPicto = 0;
@@ -21,7 +21,7 @@ Pictogramme* PictoConditionMultipleParser::parse(const QDomElement & element, Al
     for( int i = 0; i < nodes.count(); i++ ) {
         QDomNode currentNode = nodes.at(i);
          if(currentNode.isElement()) {
-              LabelItem *labelItem = new LabelItem( readText(currentNode, "Titre"), 150, 25, 25, picto );
+              LabelItem *labelItem = new LabelItem( readText(currentNode, "Titre"), TailleMaxCondM, 25, hauteurMax / 2, picto );
               labelItem->setAnchorType( AncreItem::Down );
 
 
